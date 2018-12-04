@@ -2,7 +2,7 @@
 [include]
         path = ~/.gitconfig.local
 [hub]
-        protocol = https
+        protocol = ssh 
 [alias]
 [color]
         diff = auto
@@ -11,7 +11,7 @@
         ui = true
 [core]
         excludesfile = ~/.gitignore
-        editor = nvim
+        editor = vim
 [apply]
         whitespace = nowarn
 [mergetool]
