@@ -1,8 +1,4 @@
 # Local/private config goes in the include
-
-[user]
-        name = Cason Adams
-        email = casonadams@gmail.com
 [include]
         path = ~/.gitconfig.local
 [hub]
