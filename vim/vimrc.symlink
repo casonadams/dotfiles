@@ -1,3 +1,4 @@
+" Installs Plug Plugin Manager
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -26,3 +27,6 @@ filetype indent plugin on
 
 colorscheme codedark
 let g:airline_theme = 'codedark'
+
+" Add delete key for iterm2
+set backspace=indent,eol,start
