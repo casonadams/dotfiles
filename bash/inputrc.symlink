@@ -1,0 +1,11 @@
+# option key with arrows
+ "\e[1;9D": backward-word
+ "\e[1;9C": forward-word
+
+# must disable Mission control key bindings
+# Keyboard > Shortcuts > Mission Control
+# Move left a space > off
+# Move right a space > off
+# control key with arrows
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
