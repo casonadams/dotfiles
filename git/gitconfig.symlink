@@ -2,7 +2,7 @@
 [include]
         path = ~/.gitconfig.local
 [hub]
-        protocol = git
+        protocol = https 
 [alias]
 [color]
         diff = auto
