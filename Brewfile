@@ -2,6 +2,7 @@ cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 
+brew 'git'
 brew 'bash-completion'
 brew 'ffmpeg'
 brew 'mpv'
