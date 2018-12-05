@@ -11,7 +11,7 @@ WHITE='\033[1;37m'
 SET='\033[0m'
 
 export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
+export LSCOLORS=exfxcxdxbxegedabagacad
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion

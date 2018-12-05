@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cp Shortcuts.json ~/Library/Application\ Support/Spectacle/Shortcuts.json
+cp ~/.dotfiles/spectcal/Shortcuts.json ~/Library/Application\ Support/Spectacle/Shortcuts.json

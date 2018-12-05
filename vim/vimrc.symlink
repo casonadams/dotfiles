@@ -27,7 +27,7 @@ filetype indent plugin on
 
 colorscheme codedark
 let g:airline_theme = 'codedark'
-set listchars=eol:¬,tab:>·,trail:~
+set listchars=tab:>·,trail:~
 set list
 
 " Add delete key for iterm2
