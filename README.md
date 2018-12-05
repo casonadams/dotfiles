@@ -44,7 +44,7 @@ Run this:
 ```sh
 git clone git@github.com:casonadams/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-script/bootstrap
+./script/bootstrap
 ```
 
 This will symlink the appropriate files in `.dotfiles` to your home directory.
