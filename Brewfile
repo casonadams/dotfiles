@@ -8,6 +8,7 @@ brew 'ffmpeg'
 brew 'mpv'
 brew 'wget'
 brew 'vim'
+brew 'dep'
 
 cask 'docker'
 cask 'keeweb'
