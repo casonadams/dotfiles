@@ -18,6 +18,8 @@ Plug 'scrooloose/syntastic'
 Plug 'tomasiser/vim-code-dark'
 Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
+" Plug 'Valloric/YouCompleteMe'
 " Initialize plugin system
 call plug#end()
 
@@ -29,14 +31,18 @@ colorscheme codedark
 let g:airline_theme = 'codedark'
 set listchars=tab:>·,trail:~
 set list
+set clipboard=unnamed
+
+" list buffers nicely
+nmap <C-\> :CtrlPBuffer<cr>
 
 " Add delete key for iterm2
 set backspace=indent,eol,start
 
 " syntastic START --------------------------------------------
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -44,12 +50,49 @@ let g:syntastic_check_on_open = 1
 
 let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 let g:syntastic_go_checkers = ['gofmt', 'golint']
+let g:syntastic_python_checkers = ['pylint']
+
 " syntastic END ---------------------------------------------
 "
 "
-" " fatih/vim-go ----------------------------------------------
-
-" disable fmt on autosave, use linter
+" fatih/vim-go ----------------------------------------------
+" disable fmt on autosave, use linter if set to 0
 let g:go_fmt_autosave = 1
-
 " fatih/vim-go END ------------------------------------------
+
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Valloric/YouCompleteMe ------------------------------------
+" let g:ycm_autoclose_preview_window_after_completion=1
+" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" Valloric/YouCompleteMe END --------------------------------
+
+" python-mode -----------------------------------------------
+let g:pymode_python = 'python3'
+" python-mode END -------------------------------------------
+
+" CtrlP
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_reuse_window  = 'startify' " fix new window split issue
+let g:ctrlp_open_new_file = 'r' " open new file in current window
+let g:ctrlp_working_path_mode = 0 " disable fancy working path
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn))|(tmp|node_modules|dist|vendor/bundle)$',
+  \ 'file': '\v\.(exe|so|dll|jpg|jpeg|png|swp|swo)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+let g:ctrlp_bufname_mod = ':.' " show full path relative to cwd
+let g:ctrlp_bufpath_mod = '' " nothing in the path section
+let g:ctrlp_switch_buffer = '' " don't switch to already displayed buffers
+
+" set custom cmd for ignoring things in gitignore (when in project root)
+"let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" ignore everything in gitignore (regardless of project depth)
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+
