@@ -16,6 +16,7 @@ brew 'pyenv'
 brew 'rbenv'
 brew 'readline'
 brew 'xz'
+brew 'telnet'
 
 cask 'docker'
 cask 'keeweb'
