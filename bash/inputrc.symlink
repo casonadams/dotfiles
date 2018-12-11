@@ -11,4 +11,4 @@
 "\e[1;5D": backward-word
 
 # enables vi mode
-set editing-mode vi
+# set editing-mode vi
