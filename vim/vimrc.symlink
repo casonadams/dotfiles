@@ -14,12 +14,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/syntastic'
 Plug 'tomasiser/vim-code-dark'
 Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
-" Plug 'Valloric/YouCompleteMe'
+Plug 'w0rp/ale'
 " Initialize plugin system
 call plug#end()
 
@@ -29,8 +27,10 @@ filetype indent plugin on
 
 colorscheme codedark
 let g:airline_theme = 'codedark'
-set listchars=tab:>·,trail:~
-set list
+
+" set listchars=tab:>·,trail:~
+" set list
+
 set clipboard=unnamed
 
 " list buffers nicely
@@ -39,22 +39,33 @@ nmap <C-\> :CtrlPBuffer<cr>
 " Add delete key for iterm2
 set backspace=indent,eol,start
 
-" syntastic START --------------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" ale START -------------------------------------------------
+" resolve fight between vim-go and ale
+"let g:go_fmt_fail_silently = 1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+" this isn't an actual ale var, this is just a placeholder for stuff i use
+" sometimes
+"let g:disabled_ale_fixers = {
+"\   'python': ['flake8'],
+"\}
 
-let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-let g:syntastic_go_checkers = ['gofmt', 'golint']
-let g:syntastic_python_checkers = ['pylint']
+let g:ale_linters = {
+\   'python': ['flake8', 'pylint'],
+\}
+" fixers
+let g:ale_fixers = {
+\   'go': ['gofmt', 'goimports'],
+\   'json': ['fixjson'],
+\   'python': ['autopep8', 'yapf']
+\}
 
-" syntastic END ---------------------------------------------
-"
-"
+let g:ale_list_window_size = 1
+
+" Set this setting in vimrc if you want to fix files automatically on save.
+" This is off by default.
+let g:ale_fix_on_save = 1
+" ale END ---------------------------------------------------
+
 " fatih/vim-go ----------------------------------------------
 " disable fmt on autosave, use linter if set to 0
 let g:go_fmt_autosave = 1
@@ -65,15 +76,6 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-" Valloric/YouCompleteMe ------------------------------------
-" let g:ycm_autoclose_preview_window_after_completion=1
-" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" Valloric/YouCompleteMe END --------------------------------
-
-" python-mode -----------------------------------------------
-let g:pymode_python = 'python3'
-" python-mode END -------------------------------------------
 
 " CtrlP
 let g:ctrlp_show_hidden = 1
