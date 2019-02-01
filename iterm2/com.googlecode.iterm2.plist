@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AlternateMouseScroll</key>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -47,10 +49,18 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>970 768 620 392 0 0 2560 1417 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>-1532 464 606 469 -1680 390 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1949 125 796 486 1680 0 2560 1417 </string>
+	<string>1019 394 1016 512 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>589 333 570 452 0 0 1680 1027 </string>
+	<string>-1679 0 850 1027 -1680 0 1680 1027 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>1281 0 1277 1417 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>0 0 2560 1417 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -656,10 +666,14 @@
 			<string>/Users/cadams</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveRequestedFullDiskAccess</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>342A71B1-042A-4973-BDC1-FD936CD97F92</string>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncSuppressBroadcastInputWarning</key>
 	<true/>
 	<key>NoSyncSuppressBroadcastInputWarning_selection</key>
@@ -668,6 +682,8 @@
 	<real>566175378.27259696</real>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
+	<key>PasteTabToStringTabStopSize</key>
+	<integer>4</integer>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -714,7 +730,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-12-11T01:26:44Z</date>
+	<date>2019-01-26T22:54:12Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>WordCharacters</key>
