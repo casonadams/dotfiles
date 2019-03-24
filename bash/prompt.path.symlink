@@ -52,4 +52,6 @@ function date_time {
   echo "${DARKGRAY}\D{%Y-%m-%d} \D{%H:%M:%S %Z}${SET}"
 }
 
-export PS1="\n$(date_time) \$(git_dirty)\$(need_push)\n${BLUE}\w${SET}\n$ "
+# PS1="\[\033]0;\w\007\]>"
+
+export PS1="\[\033]0;\W\007\]\n$(date_time) \$(git_dirty)\$(need_push)\n${BLUE}\w${SET}\n$ "

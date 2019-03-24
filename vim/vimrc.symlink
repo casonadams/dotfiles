@@ -33,8 +33,8 @@ syntax on
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
 
-" colorscheme codedark
-" let g:airline_theme = 'codedark'
+colorscheme default
+let g:airline_theme = 'codedark'
 let g:deoplete#enable_at_startup = 1
 
 " set listchars=tab:>·,trail:~
