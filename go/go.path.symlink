@@ -1,4 +1,4 @@
 export GOPATH="$HOME/go"
-export GOROOT="/usr/local/go"
+# export GOROOT="/usr/local/go"
 export GOBIN="$GOPATH/bin"
 PATH=$PATH:$GOPATH/bin
