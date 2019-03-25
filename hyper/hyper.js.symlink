@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     opacity: {
-      focus: 0.95,
+      focus: 0.90,
       blur: 0.85
     },
     // opacity: 0.95,
@@ -12,7 +12,7 @@ module.exports = {
     fontFamily: '"Roboto Mono for Powerline", "Meslo LG L DZ for Powerline", "Source Code Pro for Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,28,229,0.8)',
+    cursorColor: 'rgba(213,213,213,1.0)',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
     cursorShape: 'BLOCK',
@@ -27,7 +27,7 @@ module.exports = {
     borderColor: '#333',
 
     // size of window by pixels (width, height)
-     windowSize: [1200, 600],
+     windowSize: [600,400],
 
     // custom css to embed in the main window
     css: '',
@@ -52,21 +52,21 @@ module.exports = {
     // an array here instead of a color map object
     colors: {
       black: '#000000',
-      red: '#ff0000',
-      green: '#33ff00',
-      yellow: '#ffff00',
-      blue: '#0066ff',
-      magenta: '#cc00ff',
-      cyan: '#00ffff',
-      white: '#d0d0d0',
-      lightBlack: '#808080',
-      lightRed: '#ff0000',
-      lightGreen: '#33ff00',
-      lightYellow: '#ffff00',
-      lightBlue: '#0066ff',
-      lightMagenta: '#cc00ff',
-      lightCyan: '#00ffff',
-      lightWhite: '#ffffff'
+      red: '#C75646',
+      green: '#8EB33B',
+      yellow: '#D0B03C',
+      blue: '#4E90A7',
+      magenta: '#C8A0D1',
+      cyan: '#218693',
+      white: '#B0B0B0',
+      lightBlack: '#5D5D5D',
+      lightRed: '#E09690',
+      lightGreen: '#CDEE69',
+      lightYellow: '#FFE377',
+      lightBlue: '#9CD9F0',
+      lightMagenta: '#FBB1F9',
+      lightCyan: '#77DFD8',
+      lightWhite: '#F7F7F7'
     },
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
@@ -92,7 +92,9 @@ module.exports = {
 
 
   plugins: [
-    'hyper-materialshell',
+    //'hyper-materialshell',
+    //'hyperblue-vibrancy',
+    //'hyper-smyck',
     'hypercwd',
     'hyper-quit',
     'hyperterm-tabs',
@@ -105,4 +107,5 @@ module.exports = {
   ],
 
   localPlugins: []
-};
+}
+
