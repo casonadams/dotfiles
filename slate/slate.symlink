@@ -1,4 +1,3 @@
-bind b:cmd;alt focus 'Brave Browser'
 alias r1 push right bar-resize:screenSizeX*0.501
 alias r2 push right bar-resize:screenSizeX*0.334
 alias r3 push right bar-resize:screenSizeX*0.667
