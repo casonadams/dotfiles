@@ -10,6 +10,7 @@ endif
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
+Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -31,7 +32,7 @@ let g:airline_theme = 'codedark'
 " set listchars=tab:>·,trail:~
 " set list
 
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " list buffers nicely
 nmap <C-\> :CtrlPBuffer<cr>
@@ -45,9 +46,9 @@ set backspace=indent,eol,start
 
 " this isn't an actual ale var, this is just a placeholder for stuff i use
 " sometimes
-"let g:disabled_ale_fixers = {
-"\   'python': ['flake8'],
-"\}
+let g:disabled_ale_fixers = {
+\   'python': ['flake8'],
+\}
 
 let g:ale_linters = {
 \   'python': ['flake8', 'pylint'],
