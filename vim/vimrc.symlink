@@ -19,6 +19,7 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
+Plug 'cespare/vim-toml'
 " Initialize plugin system
 call plug#end()
 
@@ -28,6 +29,7 @@ filetype indent plugin on
 
 colorscheme codedark
 let g:airline_theme = 'codedark'
+let g:deoplete#enable_at_startup = 1
 
 " set listchars=tab:>·,trail:~
 " set list
