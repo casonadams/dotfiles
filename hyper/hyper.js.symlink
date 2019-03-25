@@ -24,7 +24,7 @@ module.exports = {
     backgroundColor: '#1E1E1E',
 
     // border color (window, tabs)
-    borderColor: '#569CD6',
+    borderColor: '#333333',
 
     // size of window by pixels (width, height)
      windowSize: [600,400],
