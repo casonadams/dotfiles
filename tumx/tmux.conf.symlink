@@ -192,4 +192,4 @@ set -g @plugin 'tmux-plugins/tmux-open'
 set -g @continuum-restore 'on'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-run -b '~/.tmux/plugins/tpm/tpm'
+# run -b '~/.tmux/plugins/tpm/tpm'
