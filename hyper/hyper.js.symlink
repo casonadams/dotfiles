@@ -6,19 +6,25 @@ module.exports = {
     },
     // opacity: 0.95,
     // default font size in pixels for all tabs
-    fontSize: 12,
+    fontSize: 12.5,
 
     // font family with optional fallbacks
-    fontFamily: '"Roboto Mono for Powerline", "Meslo LG L DZ for Powerline", "Source Code Pro for Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+    fontFamily: 'Monaco, Consolas, "Lucida Console", monospace',
+    // fontFamily: '"Roboto Mono for Powerline", "Meslo LG L DZ for Powerline", "Source Code Pro for Powerline", Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(213,213,213,1.0)',
+    //cursorColor: 'rgba(213,213,213,1.0)',
+    cursorColor: 'rgba(248,28,229,0.8)',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
     cursorShape: 'BLOCK',
 
+    // set to true for blinking cursor
+    cursorBlink: false,
+
     // color of the text
-    foregroundColor: '#D4D4D4',
+    // foregroundColor: '#D4D4D4',
+    foregroundColor: '#FFFFFF',
 
     // terminal background color
     backgroundColor: '#1E1E1E',
@@ -45,7 +51,7 @@ module.exports = {
     showWindowControls: 'false',
 
     // custom padding (css format, i.e.: `top right bottom left`)
-    padding: '0px 0px, 0px, 0px',
+    padding: '12px 12px',
 
     // the full list. if you're going to provide the full color palette,
     // including the 6 x 6 color cubes and the grayscale map, just provide
@@ -102,8 +108,8 @@ module.exports = {
     'hyper-statusline',
     'hyper-search',
     'hyper-opacity',
-    'hyper-tab-touchbar',
-    'hyperminimal'
+    'hyper-tab-touchbar'
+    //'hyperminimal'
   ],
 
   localPlugins: []

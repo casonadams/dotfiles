@@ -1,0 +1,195 @@
+######################################
+# The TMUX Config to end all Configs #
+######################################
+
+# Mouse Support in OSX
+set-option -g mouse on
+# Scrollback buffer
+set -g history-limit 65000
+# tmux display things in 256 colors
+set-option -g default-terminal "screen-256color"
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+# allow for navigating between words with option
+set-window-option -g xterm-keys on
+# command delay? We don't want that, make it short
+set -sg escape-time 10
+# Set the numbering of windows to go from 1 instead
+# of 0 - silly programmers :|
+set-option -g base-index 1
+setw -g pane-base-index 1
+# Allow the arrow key to be used immediately after changing windows
+set-option -g repeat-time 0
+# Set window notifications
+setw -g monitor-activity on
+set -g visual-activity on
+
+##################################
+# Status bar and General Theming #
+##################################
+
+set -g status-left-length 32
+set -g status-right-length 150
+
+### BEGIN NEW THEME
+
+TERM_BG="#191A1C"
+BORDER_BG="#363738"
+ACTIVE_BORDER_BG="#f8d891"
+MAIN_COLOR="#feff25"
+COMP_TEXT_TERM_BG="#1C1B20"
+SELECTED="#262532"
+LIGHTER_GRAY="#525252"
+
+# Status update interval
+set -g status-interval 1
+
+# Basic status bar colors
+set -g status-fg $LIGHTER_GRAY
+set -g status-bg $TERM_BG
+
+# Left side of status bar
+set -g status-left-bg $TERM_BG
+set -g status-left-fg colour243
+set -g status-left-length 40
+set -g status-left "#[fg=$COMP_TEXT_TERM_BG,bg=#feff25,bold] #S #[fg=$MAIN_COLOR,bg=$LIGHTER_GRAY,nobold] #[fg=$COMP_TEXT_TERM_BG,bg=$LIGHTER_GRAY] #(whoami) #[fg=$LIGHTER_GRAY,bg=colour235] #[fg=$LIGHTER_GRAY,bg=colour235] #I:#P #[fg=colour235,bg=$TERM_BG,nobold] "
+
+# Right side of status bar
+set -g status-right-bg $TERM_BG
+set -g status-right-fg colour243
+set -g status-right-length 150
+set -g status-right "#[fg=#262728,bg=$TERM_BG] #[fg=#6F7071, bg=#262728] %b %d %Y #[fg=$LIGHTER_GRAY,bg=#262728] #[fg=$COMP_TEXT_TERM_BG,bg=$LIGHTER_GRAY] %I:%M %p  #(date -u | awk '{print substr($4, 0, length($4)-3)}') #[fg=#333335,bg=$LIGHTER_GRAY] #[fg=$COMP_TEXT_TERM_BG,bg=#333335] #(battery -e -p -t)#[fg=$MAIN_COLOR,bg=#333335] #[fg=$COMP_TEXT_TERM_BG,bg=$MAIN_COLOR,bold] #(ipconfig getifaddr en0) "
+# Window status
+set -g window-status-format "  #I:#W  "
+set -g window-status-current-format "#[bg=$TERM_BG,fg=$SELECTED] #[fg=$MAIN_COLOR,bg=$SELECTED,nobold] #I:#W #[bg=$TERM_BG,fg=$SELECTED,nobold]"
+# Current window status
+set -g window-status-current-bg $MAIN_COLOR
+set -g window-status-current-fg colour235
+
+# Window with activity status
+set -g window-status-activity-attr bold
+set -g window-status-activity-bg $TERM_BG
+set -g window-status-activity-fg green # maybe change
+
+# Window separator
+set -g window-status-separator ""
+
+# Window status alignment
+set -g status-justify left
+
+# Pane border
+set -g pane-border-fg $BORDER_BG
+
+# Active pane border
+set -g pane-active-border-bg default
+set -g pane-active-border-fg $ACTIVE_BORDER_BG
+
+# Pane number indicator
+set -g display-panes-colour $TERM_BG
+set -g display-panes-active-colour colour245
+
+# Clock mode
+set -g clock-mode-colour $MAIN_COLOR
+set -g clock-mode-style 12
+
+# Message
+set -g message-bg "#222426"
+set -g message-fg $MAIN_COLOR
+set -g message-attr bold
+
+# Command message
+set -g message-command-bg $TERM_BG
+set -g message-command-fg $SELECTED
+
+# Mode
+set -g mode-bg "#222426"
+set -g mode-fg $LIGHTER_GRAY
+
+############
+# Hot Keys #
+############
+
+# Tmux uses a 'control key', let's set it to 'Ctrl-a'
+# Reason: 'Ctrl-a' is easier to reach than 'Ctrl-b'
+set -g prefix C-a
+unbind C-b
+
+# Allow us to reload our Tmux configuration while
+# using Tmux
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# Rotate the layout
+bind-key enter next-layout
+
+# kill window
+bind 'k' kill-window
+# break pane to a new window
+bind-key 'b' break-pane
+
+# Use the vertical and horizontal symbols to split the screen
+# in the current path.
+bind - split-window -c "#{pane_current_path}"
+bind \ split-window -h -c "#{pane_current_path}"
+bind c new-window -c "#{pane_current_path}"
+# Add support for additional aliases of splitting
+bind '"' split-window -c "#{pane_current_path}"
+bind % split-window -h -c "#{pane_current_path}"
+
+# Shell binding for copy-paste
+# set -g default-shell $SHELL
+# set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+
+# Vim bindings for copy mode
+setw -g mode-keys vi
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+
+# use vim-like keys for splits and windows
+bind-key v split-window -h -c "#{pane_current_path}"
+bind-key s split-window -v -c "#{pane_current_path}"
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+bind-key space next-window
+bind-key bspace previous-window
+bind-key enter next-layout
+bind-key C-o rotate-window
+
+bind-key + select-layout main-horizontal
+bind-key = select-layout main-vertical
+set-window-option -g other-pane-height 25
+set-window-option -g other-pane-width 80
+
+bind-key a last-pane
+bind-key q display-panes
+bind-key c new-window
+bind-key t next-window
+bind-key T previous-window
+
+bind-key : command-prompt
+bind-key L clear-history
+
+############
+# Plug-ins #
+############
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+# Persist across shutdown
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+# Requires brew install urlview
+# Open URLs buffer with u
+set -g @plugin 'tmux-plugins/tmux-urlview'
+# Open files, URLs, etc. from copy mode
+# o - "open" a highlighted selection with the system default program
+# Ctrl-o - open a highlighted selection with the $EDITOR
+# Shift-s - search the highlighted selection on Google
+set -g @plugin 'tmux-plugins/tmux-open'
+
+set -g @continuum-restore 'on'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'
