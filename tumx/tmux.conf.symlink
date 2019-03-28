@@ -34,40 +34,70 @@ set -g status-right-length 150
 
 TERM_BG="#191A1C"
 BORDER_BG="#363738"
-ACTIVE_BORDER_BG="#f8d891"
-MAIN_COLOR="#feff25"
+ACTIVE_BORDER_BG="#9CDCFE"
+MAIN_COLOR="#569CD6"
 COMP_TEXT_TERM_BG="#1C1B20"
 SELECTED="#262532"
 LIGHTER_GRAY="#525252"
+
+GRAY="#808080"
+VILOET="646695"
+BLUE="#569CD6"
+DARK_BLUE="#223E55"
+LIGHT_BLUE="#9CDCFE"
+GREEN="#608B4E"
+BLUE_GREEN="#4EC9B0"
+LIGHT_GREEN="#B5CEA8"
+RED="#EE4646"
+ORANGE="#CE9178"
+LIGHT_RED="#CC6666"
+YELLOW_ORANGE="#CCCC66"
+YELLOW="#CCCC99"
+PINK="#C586C0"
+BACKGROUND="#1E1E1E"
+FOREGROUND="#CCCCCC"
+BLACK="#000000"
 
 # Status update interval
 set -g status-interval 1
 
 # Basic status bar colors
-set -g status-fg $LIGHTER_GRAY
-set -g status-bg $TERM_BG
+set -g status-fg $FOREGROUND
+set -g status-bg $BACKGROUND
 
 # Left side of status bar
-set -g status-left-bg $TERM_BG
-set -g status-left-fg colour243
+set -g status-left-bg $BLUE
+set -g status-left-fg $BLACK
 set -g status-left-length 40
-set -g status-left "#[fg=$COMP_TEXT_TERM_BG,bg=#feff25,bold] #S #[fg=$MAIN_COLOR,bg=$LIGHTER_GRAY,nobold] #[fg=$COMP_TEXT_TERM_BG,bg=$LIGHTER_GRAY] #(whoami) #[fg=$LIGHTER_GRAY,bg=colour235] #[fg=$LIGHTER_GRAY,bg=colour235] #I:#P #[fg=colour235,bg=$TERM_BG,nobold] "
+set -g status-left "\
+#[nobold] #S \
+#[bg=$BACKGROUND]\
+#[bg=$BLACK,fg=$GRAY,nobold] #(whoami) \
+#[bg=$GRAY,fg=$BACKGROUND] #I:#P \
+#[bg=$BACKGROUND] "
 
 # Right side of status bar
-set -g status-right-bg $TERM_BG
-set -g status-right-fg colour243
+set -g status-right-bg $BACKGROUND
+set -g status-right-fg $FOREGROUND
 set -g status-right-length 150
-set -g status-right "#[fg=#262728,bg=$TERM_BG] #[fg=#6F7071, bg=#262728] %b %d %Y #[fg=$LIGHTER_GRAY,bg=#262728] #[fg=$COMP_TEXT_TERM_BG,bg=$LIGHTER_GRAY] %I:%M %p  #(date -u | awk '{print substr($4, 0, length($4)-3)}') #[fg=#333335,bg=$LIGHTER_GRAY] #[fg=$COMP_TEXT_TERM_BG,bg=#333335] #(battery -e -p -t)#[fg=$MAIN_COLOR,bg=#333335] #[fg=$COMP_TEXT_TERM_BG,bg=$MAIN_COLOR,bold] #(ipconfig getifaddr en0) "
+set -g status-right "\
+#[fg=$GRAY,bg=$BACKGROUND] %b %d %Y  \
+#[fg=$BACKGROUND,bg=$GRAY] %I:%M %p  #(date -u | awk '{print substr($4, 0, length($4)-3)}') UTC \
+#[fg=$GRAY,bg=$BACKGROUND] #(pmset -g ps | grep '%' | awk '{print $3}' | tr -d ';') \
+#[fg=$BLACK,bg=$BLUE] #(ipconfig getifaddr en0) "
+
 # Window status
 set -g window-status-format "  #I:#W  "
-set -g window-status-current-format "#[bg=$TERM_BG,fg=$SELECTED] #[fg=$MAIN_COLOR,bg=$SELECTED,nobold] #I:#W #[bg=$TERM_BG,fg=$SELECTED,nobold]"
+set -g window-status-current-format "\
+#[bg=$BACKGROUND,fg=$BLUE,nobold] #I:#W "
+
 # Current window status
-set -g window-status-current-bg $MAIN_COLOR
+set -g window-status-current-bg $BLUE
 set -g window-status-current-fg colour235
 
 # Window with activity status
 set -g window-status-activity-attr bold
-set -g window-status-activity-bg $TERM_BG
+set -g window-status-activity-bg $FOREGROUND
 set -g window-status-activity-fg green # maybe change
 
 # Window separator
