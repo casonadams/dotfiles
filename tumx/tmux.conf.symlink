@@ -93,12 +93,12 @@ set -g window-status-current-format "\
 
 # Current window status
 set -g window-status-current-bg $BLUE
-set -g window-status-current-fg colour235
+set -g window-status-current-fg $BACKGROUND
 
 # Window with activity status
 set -g window-status-activity-attr bold
-set -g window-status-activity-bg $FOREGROUND
-set -g window-status-activity-fg green # maybe change
+set -g window-status-activity-bg $LIGHTER_GRAY
+set -g window-status-activity-fg $BLUE
 
 # Window separator
 set -g window-status-separator ""
@@ -107,32 +107,33 @@ set -g window-status-separator ""
 set -g status-justify left
 
 # Pane border
-set -g pane-border-fg $BORDER_BG
+set -g pane-border-fg $DARK_BLUE
 
 # Active pane border
-set -g pane-active-border-bg default
-set -g pane-active-border-fg $ACTIVE_BORDER_BG
+set -g pane-active-border-bg $BACKGROUND
+set -g pane-active-border-fg $LIGHT_BLUE
 
 # Pane number indicator
-set -g display-panes-colour $TERM_BG
-set -g display-panes-active-colour colour245
+set -g display-panes-colour $BACKGROUND
+set -g display-panes-active-colour $LIGHT_BLUE
 
 # Clock mode
-set -g clock-mode-colour $MAIN_COLOR
+set -g clock-mode-colour $LIGHTER_GRAY
 set -g clock-mode-style 12
 
 # Message
-set -g message-bg "#222426"
-set -g message-fg $MAIN_COLOR
+set -g message-bg $BACKGROUND
+set -g message-fg $FOREGROUND
 set -g message-attr bold
 
 # Command message
-set -g message-command-bg $TERM_BG
-set -g message-command-fg $SELECTED
+set -g message-command-bg $BACKGROUND
+set -g message-command-fg $BLUE
 
 # Mode
-set -g mode-bg "#222426"
-set -g mode-fg $LIGHTER_GRAY
+# set -g mode-bg "#222426"
+set -g mode-bg $BLUE
+set -g mode-fg $BACKGROUND
 
 ############
 # Hot Keys #
@@ -140,8 +141,9 @@ set -g mode-fg $LIGHTER_GRAY
 
 # Tmux uses a 'control key', let's set it to 'Ctrl-a'
 # Reason: 'Ctrl-a' is easier to reach than 'Ctrl-b'
-set -g prefix C-a
-unbind C-b
+# set -g prefix C-a
+set -g prefix C-b
+unbind C-a
 
 # Allow us to reload our Tmux configuration while
 # using Tmux

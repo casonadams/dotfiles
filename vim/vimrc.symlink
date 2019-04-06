@@ -34,6 +34,8 @@ let g:deoplete#enable_at_startup = 1
 " set listchars=tab:>·,trail:~
 " set list
 
+set mouse=a
+
 " set clipboard=unnamed
 
 " list buffers nicely
