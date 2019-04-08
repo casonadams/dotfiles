@@ -14,12 +14,13 @@ Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'tomasiser/vim-code-dark'
 Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
 Plug 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim'
 " Initialize plugin system
 call plug#end()
 
@@ -28,7 +29,7 @@ syntax on
 filetype indent plugin on
 
 colorscheme codedark
-let g:airline_theme = 'codedark'
+" let g:airline_theme = 'codedark'
 let g:deoplete#enable_at_startup = 1
 
 " set listchars=tab:>·,trail:~
@@ -75,6 +76,10 @@ let g:ale_fix_on_save = 1
 " disable fmt on autosave, use linter if set to 0
 let g:go_fmt_autosave = 1
 " fatih/vim-go END ------------------------------------------
+"
+" rustlang/rust.vim -----------------------------------------
+let g:rustfmt_autosave = 1
+" rustlang/rust.vim END -------------------------------------
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
