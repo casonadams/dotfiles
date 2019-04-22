@@ -7,7 +7,8 @@ set-option -g mouse on
 # Scrollback buffer
 set -g history-limit 65000
 # tmux display things in 256 colors
-set-option -g default-terminal "screen-256color"
+# set-option -g default-terminal "screen-256color"
+set-option -g default-terminal "xterm-256color"
 set-option -ga terminal-overrides ",xterm-256color:Tc"
 # allow for navigating between words with option
 set-window-option -g xterm-keys on
@@ -96,7 +97,7 @@ set -g window-status-current-bg $BLUE
 set -g window-status-current-fg $BACKGROUND
 
 # Window with activity status
-set -g window-status-activity-attr bold
+# set -g window-status-activity-attr bold
 set -g window-status-activity-bg $BACKGROUND
 set -g window-status-activity-fg $BLUE
 
