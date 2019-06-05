@@ -111,8 +111,8 @@ set -g status-justify left
 set -g pane-border-fg $DARK_BLUE
 
 # Active pane border
-set -g pane-active-border-bg $BLACK
-set -g pane-active-border-fg $LIGHT_BLUE
+set -g pane-active-border-bg $BACKGROUND
+set -g pane-active-border-fg $BLUE
 
 # Pane number indicator
 set -g display-panes-colour $BACKGROUND
