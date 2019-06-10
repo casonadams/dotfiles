@@ -7,5 +7,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-alias vsh="docker run --rm -ti -v ~/.vsh/workspace/:/workspace vivint/vsh vsh"
-export PATH="$HOME/.cargo/bin:$PATH"
+BLUE='\033[0;34m'
+SET='\033[0m'
+
+prompt() {
+    PS1="\n$(powerline-rs --newline --modules time,git,gitstage --shell bash $?)\n${BLUE}\w${SET}\n$ "
+}
+PROMPT_COMMAND=prompt
