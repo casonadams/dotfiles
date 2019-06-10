@@ -11,6 +11,6 @@ BLUE='\033[0;34m'
 SET='\033[0m'
 
 prompt() {
-    PS1="\n$(powerline-rs --newline --modules time,git,gitstage --shell bash $?)\n${BLUE}\w${SET}\n$ "
+    PS1="\[\033]0;\w\007\]\n$(powerline-rs --newline --modules time,git,gitstage --shell bash $?)\n${BLUE}\w${SET}\n$ "
 }
 PROMPT_COMMAND=prompt

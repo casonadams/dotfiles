@@ -54,4 +54,4 @@ function date_time {
 
 # PS1="\[\033]0;\w\007\]>"
 
-export PS1="\[\033]0;\W\007\]\n$(date_time) \$(git_dirty)\$(need_push)\n${BLUE}\w${SET}\n$ "
+# export PS1="\[\033]0;\W\007\]\n$(date_time) \$(git_dirty)\$(need_push)\n${BLUE}\w${SET}\n$ "
