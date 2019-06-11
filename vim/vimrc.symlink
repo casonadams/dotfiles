@@ -14,7 +14,7 @@ Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'tomasiser/vim-code-dark'
 Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
@@ -25,6 +25,9 @@ Plug 'rust-lang/rust.vim'
 call plug#end()
 
 syntax on
+set hidden
+set title
+" set showtabline=2
 
 " Set tabwidth
 set tabstop=4
@@ -45,7 +48,7 @@ let g:deoplete#enable_at_startup = 1
 
 " set clipboard=unnamed
 
-" list buffers nicely
+"list buffers nicely
 nmap <C-\> :CtrlPBuffer<cr>
 
 " Add delete key for iterm2

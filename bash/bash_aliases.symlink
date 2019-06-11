@@ -1,3 +1,4 @@
+alias vi='nvim'
 alias vim='nvim'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'

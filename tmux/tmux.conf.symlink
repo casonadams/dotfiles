@@ -1,46 +1,34 @@
-######################################
-# The TMUX Config to end all Configs #
-######################################
-
-# Mouse Support in OSX
+# Scroll up with mouse
 set-option -g mouse on
+
 # Scrollback buffer
 set -g history-limit 65000
+
 # tmux display things in 256 colors
 # set-option -g default-terminal "screen-256color"
 set-option -g default-terminal "xterm-256color"
 set-option -ga terminal-overrides ",xterm-256color:Tc"
+
 # allow for navigating between words with option
 set-window-option -g xterm-keys on
+
 # command delay? We don't want that, make it short
 set -sg escape-time 10
-# Set the numbering of windows to go from 1 instead
-# of 0 - silly programmers :|
-set-option -g base-index 1
-setw -g pane-base-index 1
+
 # Allow the arrow key to be used immediately after changing windows
 set-option -g repeat-time 0
+
 # Set window notifications
 setw -g monitor-activity on
 set -g visual-activity on
 
-##################################
-# Status bar and General Theming #
-##################################
-
-set -g status-left-length 32
-set -g status-right-length 150
+# switch panes without prefix using Alt-arrow
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
 
 ### BEGIN NEW THEME
-
-TERM_BG="#191A1C"
-BORDER_BG="#363738"
-ACTIVE_BORDER_BG="#9CDCFE"
-MAIN_COLOR="#569CD6"
-COMP_TEXT_TERM_BG="#1C1B20"
-SELECTED="#262532"
-LIGHTER_GRAY="#525252"
-
 GRAY="#808080"
 VILOET="646695"
 BLUE="#569CD6"
@@ -63,83 +51,30 @@ BLACK="#000000"
 # Status update interval
 set -g status-interval 1
 
+# With this you set the window name in the status line.
+# Beware of outrageous prompts, such as the default one in RHEL 7.
+# set -g set-titles on
+
+# Reduce time to wait for Escape key. You'll want this for neovim.
+set-option escape-time 40
+
 # Basic status bar colors
-set -g status-fg $FOREGROUND
-set -g status-bg $BACKGROUND
+set -g status-style $BACKGRROUND
+set -g pane-border-style fg=$DARK_BLUE
+set -g pane-active-border-style fg=$BLUE
 
 # Left side of status bar
-set -g status-left-bg $BLUE
-set -g status-left-fg $BLACK
 set -g status-left-length 40
-set -g status-left "\
-#[nobold] #S \
-#[bg=$BACKGROUND]\
-#[bg=$BLACK,fg=$GRAY,nobold] #(whoami) \
-#[bg=$GRAY,fg=$BACKGROUND] #I:#P \
-#[bg=$BACKGROUND] "
-
-# Right side of status bar
-set -g status-right-bg $BACKGROUND
-set -g status-right-fg $FOREGROUND
-set -g status-right-length 150
-set -g status-right "\
-#[fg=$GRAY,bg=$BACKGROUND] %b %d %Y  \
-#[fg=$BACKGROUND,bg=$GRAY] %I:%M %p  #(date -u | awk '{print substr($4, 0, length($4)-3)}') UTC \
-#[fg=$GRAY,bg=$BACKGROUND] #(pmset -g ps | grep '%' | awk '{print $3}' | tr -d ';') \
-#[fg=$BLACK,bg=$BLUE] #(ipconfig getifaddr en0) "
+set -g status-left "#[fg=$BLUE,nobold] %Y-%m-%d %H:%M:%S "
 
 # Window status
-set -g window-status-format "  #I:#W  "
-set -g window-status-current-format "\
-#[bg=$BACKGROUND,fg=$BLUE,nobold] #I:#W "
+set -g window-status-current-format "#[fg=$GRAY,nobold]#T "
 
-# Current window status
-set -g window-status-current-bg $BLUE
-set -g window-status-current-fg $BACKGROUND
-
-# Window with activity status
-# set -g window-status-activity-attr bold
-set -g window-status-activity-bg $BACKGROUND
-set -g window-status-activity-fg $BLUE
-
-# Window separator
-set -g window-status-separator ""
-
-# Window status alignment
-set -g status-justify left
-
-# Pane border
-set -g pane-border-fg $DARK_BLUE
-
-# Active pane border
-set -g pane-active-border-bg $BACKGROUND
-set -g pane-active-border-fg $BLUE
-
-# Pane number indicator
-set -g display-panes-colour $BACKGROUND
-set -g display-panes-active-colour $LIGHT_BLUE
-
-# Clock mode
-set -g clock-mode-colour $LIGHTER_GRAY
-set -g clock-mode-style 12
-
-# Message
-set -g message-bg $BACKGROUND
-set -g message-fg $FOREGROUND
-set -g message-attr bold
-
-# Command message
-set -g message-command-bg $BACKGROUND
-set -g message-command-fg $BLUE
-
-# Mode
-# set -g mode-bg "#222426"
-set -g mode-bg $BLUE
-set -g mode-fg $BACKGROUND
-
-############
-# Hot Keys #
-############
+# Right side of status bar
+set -g status-right-length 150
+set -g status-right "\
+#[fg=$GRAY,bg=$BACKGROUND] #(pmset -g ps | grep '%' | awk '{print $3}' | tr -d ';') \
+#[bg=$BACKGROUND,fg=$BLUE,nobold] #(ipconfig getifaddr en0) "
 
 # Tmux uses a 'control key', let's set it to 'Ctrl-a'
 # Reason: 'Ctrl-a' is easier to reach than 'Ctrl-b'
@@ -156,6 +91,7 @@ bind-key enter next-layout
 
 # kill window
 bind 'k' kill-window
+
 # break pane to a new window
 bind-key 'b' break-pane
 
@@ -164,6 +100,7 @@ bind-key 'b' break-pane
 bind - split-window -c "#{pane_current_path}"
 bind \ split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
+
 # Add support for additional aliases of splitting
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
@@ -203,27 +140,3 @@ bind-key T previous-window
 
 bind-key : command-prompt
 bind-key L clear-history
-
-############
-# Plug-ins #
-############
-
-# List of plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-# Persist across shutdown
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-# Requires brew install urlview
-# Open URLs buffer with u
-set -g @plugin 'tmux-plugins/tmux-urlview'
-# Open files, URLs, etc. from copy mode
-# o - "open" a highlighted selection with the system default program
-# Ctrl-o - open a highlighted selection with the $EDITOR
-# Shift-s - search the highlighted selection on Google
-set -g @plugin 'tmux-plugins/tmux-open'
-
-set -g @continuum-restore 'on'
-
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-# run -b '~/.tmux/plugins/tpm/tpm'
