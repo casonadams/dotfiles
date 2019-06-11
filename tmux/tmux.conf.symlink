@@ -53,7 +53,7 @@ set -g status-interval 1
 
 # With this you set the window name in the status line.
 # Beware of outrageous prompts, such as the default one in RHEL 7.
-# set -g set-titles on
+set -g set-titles on
 
 # Reduce time to wait for Escape key. You'll want this for neovim.
 set-option escape-time 40
