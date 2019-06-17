@@ -1,4 +1,5 @@
 " Installs Plug Plugin Manager
+
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -21,6 +22,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 " Initialize plugin system
 call plug#end()
 
@@ -44,12 +46,19 @@ let g:deoplete#enable_at_startup = 1
 " set listchars=tab:>·,trail:~
 " set list
 
-" set mouse=a
+set mouse=a
+
+" auto reloads file changes on focus in tmux
+set autoread
+au FocusGained,BufEnter * :checktime
 
 " set clipboard=unnamed
 
 "list buffers nicely
 nmap <C-\> :CtrlPBuffer<cr>
+
+" NERDtree toggle
+map <C-n> :NERDTreeToggle<CR>
 
 " Add delete key for iterm2
 set backspace=indent,eol,start
@@ -91,10 +100,20 @@ let g:rustfmt_autosave = 1
 " rustlang/rust.vim END -------------------------------------
 
 "split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-Down> <C-W><C-J>
+nnoremap <C-Up> <C-W><C-K>
+nnoremap <C-Right> <C-W><C-L>
+nnoremap <C-Left> <C-W><C-H>
+
+
+
+" Tabs
+nmap = :tabn<cr>
+nmap - :tabp<cr>
+nmap _ :tabm -1<cr>
+nmap + :tabm +1<cr>
+"nmap ( :tabclose<cr>
+"nmap ) :tabnew<cr>
 
 " CtrlP
 let g:ctrlp_show_hidden = 1
