@@ -24,6 +24,7 @@ set-option -g repeat-time 0
 setw -g monitor-activity on
 set -g visual-activity on
 
+# Update files on focus (using for vim)
 set -g focus-events on
 
 # switch panes without prefix using Alt-arrow
@@ -81,7 +82,12 @@ set -g window-status-format "#[fg=$GRAY,bold]￭"
 
 # Right side of status bar
 set -g status-right-length 150
-set -g status-right "#[fg=$BLUE,nobold] %Y-%m-%d %H:%M:%S"
+set -g status-right "#[fg=$GRAY,nobold] #T \
+#[fg=$BLUE,nobold]%Y-%m-%d %H:%M:%S \
+#[fg=$BACKGROUND]#{cpu_fg_color}#{cpu_icon}"
+
+# Nice way to pipe command outputs
+#(iostat | sed -n '3p' | awk '{print $7}' | echo $(xargs -I{}) \"*100/8\" | bc) %"
 
 # Battery status
 #[fg=$GRAY,bg=$BACKGROUND] #(pmset -g ps | grep '%' | awk '{print $3}' | tr -d ';') \
@@ -94,6 +100,10 @@ set -g status-right "#[fg=$BLUE,nobold] %Y-%m-%d %H:%M:%S"
 # set -g prefix C-a
 set -g prefix C-b
 unbind C-a
+
+# easier and faster switching between next/prev window
+bind C-p previous-window
+bind C-n next-window
 
 # Allow us to reload our Tmux configuration while
 # using Tmux
@@ -153,3 +163,16 @@ bind-key T previous-window
 
 bind-key : command-prompt
 bind-key L clear-history
+
+if "test ! -d ~/.tmux/plugins/tpm" \
+   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+
+set -g @plugin 'tmux-plugins/tmux-cpu'
+set -g @cpu_low_fg_color "#[fg=$GREEN]"
+set -g @cpu_medium_fg_color "#[fg=$ORANGE]"
+set -g @cpu_high_fg_color "#[fg=$RED]"
+set -g @cpu_low_icon "🁣"
+set -g @cpu_medium_icon "🁩"
+set -g @cpu_high_icon "🂓"
+
+run -b '~/.tmux/plugins/tpm/tpm'
