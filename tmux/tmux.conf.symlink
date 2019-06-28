@@ -1,5 +1,6 @@
 # Scroll up with mouse
 set-option -g mouse on
+set -g set-clipboard off
 # unbind -n MouseDrag1Pane
 # unbind -Tcopy-mode MouseDrag1Pane
 
@@ -58,10 +59,9 @@ set -g status-interval 1
 
 # With this you set the window name in the status line.
 # Beware of outrageous prompts, such as the default one in RHEL 7.
-set -g set-titles on
-# set -g titles-style "#(basename $PWD)"
+# set -g set-titles on
 
-setw -g automatic-rename on
+setw -g automatic-rename off
 
 # Reduce time to wait for Escape key. You'll want this for neovim.
 set-option escape-time 40
@@ -77,14 +77,14 @@ set -g status-left "#[fg=$RED,bg=$BACKGROUND,nobold] "
 
 # Window statu:
 set -g window-status-current-format "#[fg=$RED,bold]￭"
-# set -g window-status-current-format "#[fg=$WHITE,nobold] #(echo $(basename $PWD))"
 set -g window-status-format "#[fg=$GRAY,bold]￭"
+# set -g window-status-current-format "#[fg=$BLUE] #(~/.dotfiles/path #{pane_current_path})"
+# set -g window-status-format "#[fg=$GRAY] #(~/.dotfiles/path #{pane_current_path})"
 
 # Right side of status bar
 set -g status-right-length 150
-set -g status-right "#[fg=$GRAY,nobold] #T \
-#[fg=$BLUE,nobold]%Y-%m-%d %H:%M:%S \
-#[fg=$BACKGROUND]#{cpu_fg_color}#{cpu_icon}"
+set -g status-right "#[fg=$GRAY,nobold] #(~/.dotfiles/path #{pane_current_path}) \
+#[fg=$BLUE,nobold]%Y-%m-%d %H:%M:%S "
 
 # Nice way to pipe command outputs
 #(iostat | sed -n '3p' | awk '{print $7}' | echo $(xargs -I{}) \"*100/8\" | bc) %"
@@ -128,14 +128,11 @@ bind c new-window -c "#{pane_current_path}"
 bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 
-# Shell binding for copy-paste
-# set -g default-shell $SHELL
-# set -g default-command "reattach-to-user-namespace -l ${SHELL}"
-
 # Vim bindings for copy mode
 setw -g mode-keys vi
-bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
-bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+# bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+# bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+# unbind -T copy-mode MouseDragEnd1Pane
 
 # use vim-like keys for splits and windows
 bind-key v split-window -h -c "#{pane_current_path}"
@@ -167,12 +164,15 @@ bind-key L clear-history
 if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
-set -g @plugin 'tmux-plugins/tmux-cpu'
-set -g @cpu_low_fg_color "#[fg=$GREEN]"
-set -g @cpu_medium_fg_color "#[fg=$ORANGE]"
-set -g @cpu_high_fg_color "#[fg=$RED]"
-set -g @cpu_low_icon "🁣"
-set -g @cpu_medium_icon "🁩"
-set -g @cpu_high_icon "🂓"
+# set -g @plugin 'tmux-plugins/tmux-cpu'
+# set -g @cpu_low_fg_color "#[fg=$BLUE]"
+# set -g @cpu_low_medium_fg_color "#[fg=$GREEN]"
+# set -g @cpu_medium_fg_color "#[fg=$YELLOW]"
+# set -g @cpu_medium_high_fg_color "#[fg=$ORANGE]"
+# set -g @cpu_high_fg_color "#[fg=$RED]"
+# set -g @cpu_low_icon "🌘"
+# set -g @cpu_medium_icon "🌗"
+# set -g @cpu_high_icon "🌖"
+set -g @plugin 'tmux-plugins/tmux-yank'
 
 run -b '~/.tmux/plugins/tpm/tpm'
