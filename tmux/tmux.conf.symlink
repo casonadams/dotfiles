@@ -53,38 +53,42 @@ PINK="#C586C0"
 BACKGROUND="#000000"
 FOREGROUND="#CCCCCC"
 BLACK="#000000"
+OFF="#1E1E1E"
 
 # Status update interval
 set -g status-interval 1
 
 # With this you set the window name in the status line.
 # Beware of outrageous prompts, such as the default one in RHEL 7.
-# set -g set-titles on
-
-setw -g automatic-rename off
+set -g set-titles on
+set -g set-titles-string "#T"
+set -g automatic-rename on
 
 # Reduce time to wait for Escape key. You'll want this for neovim.
 set-option escape-time 40
 
 # Basic status bar colors
-set -g status-style $BACKGRROUND
+set -g status-style bg=$BACKGROUND,fg=$BLUE
 set -g pane-border-style fg=$DARK_BLUE
 set -g pane-active-border-style fg=$BLUE
 
 # Left side of status bar
-set -g status-left-length 40
-set -g status-left "#[fg=$RED,bg=$BACKGROUND,nobold] "
+set -g status-left " "
 
-# Window statu:
-set -g window-status-current-format "#[fg=$RED,bold]￭"
-set -g window-status-format "#[fg=$GRAY,bold]￭"
-# set -g window-status-current-format "#[fg=$BLUE] #(~/.dotfiles/path #{pane_current_path})"
-# set -g window-status-format "#[fg=$GRAY] #(~/.dotfiles/path #{pane_current_path})"
+# Define Windows
+set -g window-status-current-format "#[fg=$BLUE] ➤ "
+set -g window-status-format " ➤ "
+set -g window-status-activity-style fg=$RED
+set -g window-status-bell-style fg=$YELLOW
+set -g window-status-separator " "
+set -g window-style default
+set -g window-status-style bg=$BACKGROUND,fg=$FOREGROUND
 
 # Right side of status bar
 set -g status-right-length 150
-set -g status-right "#[fg=$GRAY,nobold] #(~/.dotfiles/path #{pane_current_path}) \
-#[fg=$BLUE,nobold]%Y-%m-%d %H:%M:%S "
+set -g status-right "#[fg=$FOREGROUND]\
+#(~/.dotfiles/path #{pane_current_path}) \
+#[fg=$BLUE]%Y-%m-%d %H:%M:%S "
 
 # Nice way to pipe command outputs
 #(iostat | sed -n '3p' | awk '{print $7}' | echo $(xargs -I{}) \"*100/8\" | bc) %"

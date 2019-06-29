@@ -6,6 +6,6 @@ SET='\033[0m'
 NAME='\[\033]0;\w\007\]'
 
 prompt() {
-    PS1="$(powerline-rs --newline --modules time,git,gitstage --shell bash $?)\n${BLUE}\w${SET}\n$ "
+    PS1="$NAME$(powerline-rs --newline --modules time,git,gitstage --shell bash $?)\n${BLUE}\w${SET}\n$ "
 }
 PROMPT_COMMAND=prompt
