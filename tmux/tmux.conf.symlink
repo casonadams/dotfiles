@@ -1,8 +1,6 @@
 # Scroll up with mouse
 set-option -g mouse on
 set -g set-clipboard off
-# unbind -n MouseDrag1Pane
-# unbind -Tcopy-mode MouseDrag1Pane
 
 # Scrollback buffer
 set -g history-limit 65000
@@ -10,19 +8,19 @@ set -g history-limit 65000
 # tmux display things in 256 colors
 # set-option -g default-terminal "screen-256color"
 set-option -g default-terminal "xterm-256color"
-set-option -ga terminal-overrides ",xterm-256color:Tc"
+set-option -g terminal-overrides "xterm-256color"
 
 # allow for navigating between words with option
 set-window-option -g xterm-keys on
 
 # command delay? We don't want that, make it short
-set -sg escape-time 10
+set -g escape-time 10
 
 # Allow the arrow key to be used immediately after changing windows
 set-option -g repeat-time 0
 
 # Set window notifications
-setw -g monitor-activity on
+set -g monitor-activity on
 set -g visual-activity on
 
 # Update files on focus (using for vim)
@@ -36,7 +34,7 @@ bind -n M-Down select-pane -D
 
 ### BEGIN NEW THEME
 GRAY="#808080"
-VILOET="646695"
+VILOET="#646695"
 BLUE="#569CD6"
 DARK_BLUE="#223E55"
 LIGHT_BLUE="#9CDCFE"
@@ -133,7 +131,7 @@ bind '"' split-window -c "#{pane_current_path}"
 bind % split-window -h -c "#{pane_current_path}"
 
 # Vim bindings for copy mode
-setw -g mode-keys vi
+set -g mode-keys vi
 # bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
 # bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
 # unbind -T copy-mode MouseDragEnd1Pane
