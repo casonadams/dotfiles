@@ -97,6 +97,10 @@ set -g status-right "#[fg=$FOREGROUND]\
 # IP address
 #(ipconfig getifaddr en0)
 
+# Example of using current_path options
+# :b basename :d dirname
+# setw -g automatic-rename-format "#{b:pane_current_path}"
+
 # Tmux uses a 'control key', let's set it to 'Ctrl-a'
 # Reason: 'Ctrl-a' is easier to reach than 'Ctrl-b'
 # set -g prefix C-a
@@ -176,5 +180,6 @@ if "test ! -d ~/.tmux/plugins/tpm" \
 # set -g @cpu_medium_icon "🌗"
 # set -g @cpu_high_icon "🌖"
 set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'egel/tmux-gruvbox'
 
 run -b '~/.tmux/plugins/tpm/tpm'

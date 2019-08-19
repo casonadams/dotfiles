@@ -9,3 +9,4 @@ prompt() {
     PS1="$NAME$(powerline-rs --newline --modules time,git,gitstage --shell bash $?)\n${BLUE}\w${SET}\n$ "
 }
 PROMPT_COMMAND=prompt
+

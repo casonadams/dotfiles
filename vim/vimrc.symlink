@@ -13,10 +13,12 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 Plug 'cespare/vim-toml'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'tomasiser/vim-code-dark'
+Plug 'morhetz/gruvbox'
 Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale'
@@ -26,21 +28,32 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " Initialize plugin system
 call plug#end()
 
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
 syntax on
 set hidden
 set title
-" set showtabline=2
+set number
 
 " Set tabwidth
 set tabstop=4
 set softtabstop=0 noexpandtab
 set shiftwidth=4
+set noswapfile
 
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
 
-colorscheme codedark
-" let g:airline_theme = 'codedark'
+colorscheme gruvbox
+"colorscheme codedark
+let g:airline_theme = 'gruvbox'
+"let g:airline_theme = 'codedark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_extensions = ['branch', 'tabline']
+let g:airline_powerline_fonts = 1
+
+
 let g:deoplete#enable_at_startup = 1
 
 " set listchars=tab:>·,trail:~
@@ -105,15 +118,9 @@ nnoremap <C-Up> <C-W><C-K>
 nnoremap <C-Right> <C-W><C-L>
 nnoremap <C-Left> <C-W><C-H>
 
-
-
-" Tabs
-nmap = :tabn<cr>
-nmap - :tabp<cr>
-nmap _ :tabm -1<cr>
-nmap + :tabm +1<cr>
-"nmap ( :tabclose<cr>
-"nmap ) :tabnew<cr>
+" Buffers
+nmap = :bn<CR>
+nmap - :bp<CR>
 
 " CtrlP
 let g:ctrlp_show_hidden = 1
