@@ -6,3 +6,5 @@ done
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+PATH=~/bin:$PATH

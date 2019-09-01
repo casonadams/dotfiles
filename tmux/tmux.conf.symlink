@@ -26,33 +26,6 @@ set -g visual-activity on
 # Update files on focus (using for vim)
 set -g focus-events on
 
-# switch panes without prefix using Alt-arrow
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
-
-### BEGIN NEW THEME
-GRAY="#808080"
-VILOET="#646695"
-BLUE="#569CD6"
-DARK_BLUE="#223E55"
-LIGHT_BLUE="#9CDCFE"
-GREEN="#608B4E"
-BLUE_GREEN="#4EC9B0"
-LIGHT_GREEN="#B5CEA8"
-RED="#EE4646"
-ORANGE="#CE9178"
-LIGHT_RED="#CC6666"
-YELLOW_ORANGE="#CCCC66"
-YELLOW="#CCCC99"
-PINK="#C586C0"
-# BACKGROUND="#1E1E1E"
-BACKGROUND="#000000"
-FOREGROUND="#CCCCCC"
-BLACK="#000000"
-OFF="#1E1E1E"
-
 # Status update interval
 set -g status-interval 1
 
@@ -65,120 +38,72 @@ set -g automatic-rename on
 # Reduce time to wait for Escape key. You'll want this for neovim.
 set-option escape-time 40
 
-# Basic status bar colors
-set -g status-style bg=$BACKGROUND,fg=$BLUE
-set -g pane-border-style fg=$DARK_BLUE
-set -g pane-active-border-style fg=$BLUE
-
-# Left side of status bar
-set -g status-left " "
-
-# Define Windows
-set -g window-status-current-format "#[fg=$BLUE] ➤ "
-set -g window-status-format " ➤ "
-set -g window-status-activity-style fg=$RED
-set -g window-status-bell-style fg=$YELLOW
-set -g window-status-separator " "
-set -g window-style default
-set -g window-status-style bg=$BACKGROUND,fg=$FOREGROUND
-
-# Right side of status bar
-set -g status-right-length 150
-set -g status-right "#[fg=$FOREGROUND]\
-#(~/.dotfiles/path #{pane_current_path}) \
-#[fg=$BLUE]%Y-%m-%d %H:%M:%S "
-
-# Nice way to pipe command outputs
-#(iostat | sed -n '3p' | awk '{print $7}' | echo $(xargs -I{}) \"*100/8\" | bc) %"
-
-# Battery status
-#[fg=$GRAY,bg=$BACKGROUND] #(pmset -g ps | grep '%' | awk '{print $3}' | tr -d ';') \
-
-# IP address
-#(ipconfig getifaddr en0)
-
-# Example of using current_path options
-# :b basename :d dirname
-# setw -g automatic-rename-format "#{b:pane_current_path}"
-
-# Tmux uses a 'control key', let's set it to 'Ctrl-a'
-# Reason: 'Ctrl-a' is easier to reach than 'Ctrl-b'
-# set -g prefix C-a
-set -g prefix C-b
-unbind C-a
-
-# easier and faster switching between next/prev window
-bind C-p previous-window
-bind C-n next-window
-
 # Allow us to reload our Tmux configuration while
 # using Tmux
 bind r source-file ~/.tmux.conf \; display "Reloaded!"
 
 # Rotate the layout
 bind-key enter next-layout
-
-# kill window
-bind 'k' kill-window
-
-# break pane to a new window
-bind-key 'b' break-pane
-
-# Use the vertical and horizontal symbols to split the screen
-# in the current path.
-bind - split-window -c "#{pane_current_path}"
-bind \ split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
-
-# Add support for additional aliases of splitting
-bind '"' split-window -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
 
 # Vim bindings for copy mode
 set -g mode-keys vi
-# bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
-# bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
-# unbind -T copy-mode MouseDragEnd1Pane
 
-# use vim-like keys for splits and windows
-bind-key v split-window -h -c "#{pane_current_path}"
-bind-key s split-window -v -c "#{pane_current_path}"
-bind-key h select-pane -L
-bind-key j select-pane -D
-bind-key k select-pane -U
-bind-key l select-pane -R
-
-bind-key space next-window
-bind-key bspace previous-window
 bind-key enter next-layout
 bind-key C-o rotate-window
 
-bind-key + select-layout main-horizontal
-bind-key = select-layout main-vertical
-set-window-option -g other-pane-height 25
-set-window-option -g other-pane-width 80
+## COLORSCHEME: gruvbox dark
+set-option -g status "on"
 
-bind-key a last-pane
-bind-key q display-panes
-bind-key c new-window
-bind-key t next-window
-bind-key T previous-window
+# default statusbar color
+set-option -g status-style bg=colour237,fg=colour223 # bg=bg1, fg=fg1
 
-bind-key : command-prompt
-bind-key L clear-history
+# default window title colors
+set-window-option -g window-status-style bg=colour214,fg=colour237 # bg=yellow, fg=bg1
+
+# default window with an activity alert
+set-window-option -g window-status-activity-style bg=colour237,fg=colour248 # bg=bg1, fg=fg3
+
+# active window title colors
+set-window-option -g window-status-current-style bg=red,fg=colour237 # fg=bg1
+
+# pane border
+set-option -g pane-active-border-style fg=colour250 #fg2
+set-option -g pane-border-style fg=colour237 #bg1
+
+# message infos
+set-option -g message-style bg=colour239,fg=colour223 # bg=bg2, fg=fg1
+
+# writing commands inactive
+set-option -g message-command-style bg=colour239,fg=colour223 # bg=fg3, fg=bg1
+
+# pane number display
+set-option -g display-panes-active-colour colour250 #fg2
+set-option -g display-panes-colour colour237 #bg1
+
+# clock
+set-window-option -g clock-mode-colour colour109 #blue
+
+# bell
+set-window-option -g window-status-bell-style bg=colour167,fg=colour235 # bg=red, fg=bg
+
+## Theme settings mixed with colors (unfortunately, but there is no cleaner way)
+set-option -g status-justify "left"
+set-option -g status-left-style none
+set-option -g status-left-length "80"
+set-option -g status-right-style none
+set-option -g status-right-length "80"
+set-window-option -g window-status-separator ""
+
+set-option -g status-left "#[fg=colour248, bg=colour241] #S #[fg=colour241, bg=colour237, nobold, noitalics, nounderscore]"
+set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] %Y-%m-%d  %I:%M:%S %p #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour237, bg=colour248] #h "
+
+set-window-option -g window-status-current-format "#[fg=colour237, bg=colour214, nobold, noitalics, nounderscore]#[fg=colour239, bg=colour214] #I #[fg=colour239, bg=colour214, bold] #W #[fg=colour214, bg=colour237, nobold, noitalics, nounderscore]"
+set-window-option -g window-status-format "#[fg=colour237,bg=colour239,noitalics]#[fg=colour223,bg=colour239] #I #[fg=colour223, bg=colour239] #W #[fg=colour239, bg=colour237, noitalics]"
 
 if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
-# set -g @plugin 'tmux-plugins/tmux-cpu'
-# set -g @cpu_low_fg_color "#[fg=$BLUE]"
-# set -g @cpu_low_medium_fg_color "#[fg=$GREEN]"
-# set -g @cpu_medium_fg_color "#[fg=$YELLOW]"
-# set -g @cpu_medium_high_fg_color "#[fg=$ORANGE]"
-# set -g @cpu_high_fg_color "#[fg=$RED]"
-# set -g @cpu_low_icon "🌘"
-# set -g @cpu_medium_icon "🌗"
-# set -g @cpu_high_icon "🌖"
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'egel/tmux-gruvbox'
 

@@ -25,6 +25,9 @@ Plug 'w0rp/ale'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'craigemery/vim-autotag'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 " Initialize plugin system
 call plug#end()
 
@@ -45,6 +48,7 @@ set noswapfile
 " Wrap gitcommit file types at the appropriate length
 filetype indent plugin on
 
+set background=dark
 colorscheme gruvbox
 "colorscheme codedark
 let g:airline_theme = 'gruvbox'
@@ -60,6 +64,17 @@ let g:deoplete#enable_at_startup = 1
 " set list
 
 set mouse=a
+
+" Updates ctags on save
+:let g:easytags_events = ['BufWritePost']
+" Ctag bin location
+:let g:easytags_cmd = '/usr/local/bin/ctags'
+" tags file to save to
+:set tags=./.git/tags;
+" Look for local tags rather then global = 2
+:let g:easytags_dynamic_files = 2
+" Updates tags in all lower dirs might slow things down
+:let g:easytags_autorecurse = 1
 
 " auto reloads file changes on focus in tmux
 set autoread
