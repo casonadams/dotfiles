@@ -7,5 +7,4 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-alias vsh="docker run --rm -ti -v ~/.vsh/workspace/:/workspace vivint/vsh vsh"
-export PATH="$HOME/.cargo/bin:$PATH"
+PATH=~/bin:$PATH

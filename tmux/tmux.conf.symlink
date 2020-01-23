@@ -1,153 +1,42 @@
-######################################
-# The TMUX Config to end all Configs #
-######################################
-
-# Mouse Support in OSX
+# Scroll up with mouse
 set-option -g mouse on
+set -g set-clipboard off
+
 # Scrollback buffer
 set -g history-limit 65000
+
 # tmux display things in 256 colors
 # set-option -g default-terminal "screen-256color"
 set-option -g default-terminal "xterm-256color"
-# set-option -g default-terminal "alacritty-256colors"
-set-option -ga terminal-overrides ",xterm-256color:Tc"
-# disable clipboard to avoid race conditions
-set -g set-clipboard on
+
+set-option -g terminal-overrides "xterm-256color"
 # allow for navigating between words with option
 set-window-option -g xterm-keys on
+
 # command delay? We don't want that, make it short
-set -sg escape-time 10
-# Set the numbering of windows to go from 1 instead
-# of 0 - silly programmers :|
-set-option -g base-index 1
-setw -g pane-base-index 1
+set -g escape-time 10
+
 # Allow the arrow key to be used immediately after changing windows
 set-option -g repeat-time 0
+
 # Set window notifications
-setw -g monitor-activity on
+set -g monitor-activity on
 set -g visual-activity on
 
-##################################
-# Status bar and General Theming #
-##################################
-
-set -g status-left-length 32
-set -g status-right-length 150
-
-### BEGIN NEW THEME
-
-TERM_BG="#191A1C"
-BORDER_BG="#363738"
-ACTIVE_BORDER_BG="#9CDCFE"
-MAIN_COLOR="#569CD6"
-COMP_TEXT_TERM_BG="#1C1B20"
-SELECTED="#262532"
-LIGHTER_GRAY="#525252"
-
-GRAY="#808080"
-VILOET="646695"
-BLUE="#569CD6"
-DARK_BLUE="#223E55"
-LIGHT_BLUE="#9CDCFE"
-GREEN="#608B4E"
-BLUE_GREEN="#4EC9B0"
-LIGHT_GREEN="#B5CEA8"
-RED="#EE4646"
-ORANGE="#CE9178"
-LIGHT_RED="#CC6666"
-YELLOW_ORANGE="#CCCC66"
-YELLOW="#CCCC99"
-PINK="#C586C0"
-BACKGROUND="#1E1E1E"
-FOREGROUND="#CCCCCC"
-BLACK="#000000"
+# Update files on focus (using for vim)
+set -g focus-events on
 
 # Status update interval
 set -g status-interval 1
 
-# Basic status bar colors
-set -g status-fg $FOREGROUND
-set -g status-bg $BACKGROUND
+# With this you set the window name in the status line.
+# Beware of outrageous prompts, such as the default one in RHEL 7.
+set -g set-titles on
+set -g set-titles-string "#T"
+set -g automatic-rename on
 
-# Left side of status bar
-set -g status-left-bg $BLUE
-set -g status-left-fg $BLACK
-set -g status-left-length 40
-set -g status-left "\
-#[nobold] #S \
-#[bg=$BACKGROUND]\
-#[bg=$BLACK,fg=$GRAY,nobold] #(whoami) \
-#[bg=$GRAY,fg=$BACKGROUND] #I:#P \
-#[bg=$BACKGROUND] "
-
-# Right side of status bar
-set -g status-right-bg $BACKGROUND
-set -g status-right-fg $FOREGROUND
-set -g status-right-length 150
-set -g status-right "\
-#[fg=$GRAY,bg=$BACKGROUND] %b %d %Y  \
-#[fg=$BACKGROUND,bg=$GRAY] %I:%M %p  #(date -u | awk '{print substr($4, 0, length($4)-3)}') UTC \
-#[fg=$GRAY,bg=$BACKGROUND] #(pmset -g ps | grep '%' | awk '{print $3}' | tr -d ';') \
-#[fg=$BLACK,bg=$BLUE] #(ipconfig getifaddr en0) "
-
-# Window status
-set -g window-status-format "  #I:#W  "
-set -g window-status-current-format "\
-#[bg=$BACKGROUND,fg=$BLUE,nobold] #I:#W "
-
-# Current window status
-set -g window-status-current-bg $BLUE
-set -g window-status-current-fg $BACKGROUND
-
-# Window with activity status
-# set -g window-status-activity-attr bold
-set -g window-status-activity-bg $BACKGROUND
-set -g window-status-activity-fg $BLUE
-
-# Window separator
-set -g window-status-separator ""
-
-# Window status alignment
-set -g status-justify left
-
-# Pane border
-set -g pane-border-fg $DARK_BLUE
-
-# Active pane border
-set -g pane-active-border-bg $BACKGROUND
-set -g pane-active-border-fg $BLUE
-
-# Pane number indicator
-set -g display-panes-colour $BACKGROUND
-set -g display-panes-active-colour $LIGHT_BLUE
-
-# Clock mode
-set -g clock-mode-colour $LIGHTER_GRAY
-set -g clock-mode-style 12
-
-# Message
-set -g message-bg $BACKGROUND
-set -g message-fg $FOREGROUND
-set -g message-attr bold
-
-# Command message
-set -g message-command-bg $BACKGROUND
-set -g message-command-fg $BLUE
-
-# Mode
-# set -g mode-bg "#222426"
-set -g mode-bg $BLUE
-set -g mode-fg $BACKGROUND
-
-############
-# Hot Keys #
-############
-
-# Tmux uses a 'control key', let's set it to 'Ctrl-a'
-# Reason: 'Ctrl-a' is easier to reach than 'Ctrl-b'
-# set -g prefix C-a
-set -g prefix C-b
-unbind C-a
+# Reduce time to wait for Escape key. You'll want this for neovim.
+set-option escape-time 40
 
 # Allow us to reload our Tmux configuration while
 # using Tmux
@@ -155,77 +44,83 @@ bind r source-file ~/.tmux.conf \; display "Reloaded!"
 
 # Rotate the layout
 bind-key enter next-layout
-
-# kill window
-bind 'k' kill-window
-# break pane to a new window
-bind-key 'b' break-pane
-
-# Use the vertical and horizontal symbols to split the screen
-# in the current path.
-bind - split-window -c "#{pane_current_path}"
-bind \ split-window -h -c "#{pane_current_path}"
 bind c new-window -c "#{pane_current_path}"
-# Add support for additional aliases of splitting
-bind '"' split-window -c "#{pane_current_path}"
-bind % split-window -h -c "#{pane_current_path}"
-
-# Shell binding for copy-paste
-# set -g default-shell $SHELL
-# set -g default-command "reattach-to-user-namespace -l ${SHELL}"
 
 # Vim bindings for copy mode
-setw -g mode-keys vi
-bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
-bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+set -g mode-keys vi
 
-# use vim-like keys for splits and windows
-bind-key v split-window -h -c "#{pane_current_path}"
-bind-key s split-window -v -c "#{pane_current_path}"
-bind-key h select-pane -L
-bind-key j select-pane -D
-bind-key k select-pane -U
-bind-key l select-pane -R
-
-bind-key space next-window
-bind-key bspace previous-window
 bind-key enter next-layout
 bind-key C-o rotate-window
 
-bind-key + select-layout main-horizontal
-bind-key = select-layout main-vertical
-set-window-option -g other-pane-height 25
-set-window-option -g other-pane-width 80
+# Split horz 25% of screen with '\'
+bind '\' splitw -v -p 25
+bind '|' splitw -h -p 25
 
-bind-key a last-pane
-bind-key q display-panes
-bind-key c new-window
-bind-key t next-window
-bind-key T previous-window
+# Use vim keys to navigate panes
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
 
-bind-key : command-prompt
-bind-key L clear-history
+## COLORSCHEME: gruvbox dark
+set-option -g status "on"
 
-############
-# Plug-ins #
-############
+# default statusbar color
+set-option -g status-style bg=colour237,fg=colour223 # bg=bg1, fg=fg1
 
-# List of plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-# Persist across shutdown
-set -g @plugin 'tmux-plugins/tmux-resurrect'
-set -g @plugin 'tmux-plugins/tmux-continuum'
-# Requires brew install urlview
-# Open URLs buffer with u
-set -g @plugin 'tmux-plugins/tmux-urlview'
-# Open files, URLs, etc. from copy mode
-# o - "open" a highlighted selection with the system default program
-# Ctrl-o - open a highlighted selection with the $EDITOR
-# Shift-s - search the highlighted selection on Google
-set -g @plugin 'tmux-plugins/tmux-open'
+# default window title colors
+set-window-option -g window-status-style bg=colour214,fg=colour237 # bg=yellow, fg=bg1
 
-set -g @continuum-restore 'on'
+# default window with an activity alert
+set-window-option -g window-status-activity-style bg=colour237,fg=colour248 # bg=bg1, fg=fg3
 
-# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-# run -b '~/.tmux/plugins/tpm/tpm'
+# active window title colors
+set-window-option -g window-status-current-style bg=red,fg=colour237 # fg=bg1
+
+# pane border
+set-option -g pane-active-border-style fg=colour250 #fg2
+# set-option -g pane-active-border-style fg=colour109 #fg2
+set-option -g pane-border-style fg=colour237 #bg1
+
+# message infos
+set-option -g message-style bg=colour239,fg=colour223 # bg=bg2, fg=fg1
+
+# writing commands inactive
+set-option -g message-command-style bg=colour239,fg=colour223 # bg=fg3, fg=bg1
+
+# pane number display
+set-option -g display-panes-active-colour colour250 #fg2
+set-option -g display-panes-colour colour237 #bg1
+
+# clock
+set-window-option -g clock-mode-colour colour109 #blue
+
+# bell
+set-window-option -g window-status-bell-style bg=colour167,fg=colour235 # bg=red, fg=bg
+
+## Theme settings mixed with colors (unfortunately, but there is no cleaner way)
+set-option -g status-justify "left"
+set-option -g status-left-style none
+set-option -g status-left-length "80"
+set-option -g status-right-style none
+set-option -g status-right-length "80"
+set-window-option -g window-status-separator ""
+
+set-option -g status-left "#[fg=colour248, bg=colour241] #S #[fg=colour241, bg=colour237, nobold, noitalics, nounderscore] "
+set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] #(gitmux #{pane_current_path}) #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour241, bg=colour239]#[fg=colour248, bg=colour241] %H:%M:%S "
+
+set-window-option -g window-status-current-format "#[fg=colour237, bg=colour214, nobold, noitalics, nounderscore]#[fg=colour239, bg=colour214] #I #[fg=colour239, bg=colour214, bold] #W #[fg=colour214, bg=colour237, nobold, noitalics, nounderscore]"
+set-window-option -g window-status-format "#[fg=colour237,bg=colour239,noitalics]#[fg=colour223,bg=colour239] #I #[fg=colour223, bg=colour239] #W #[fg=colour239, bg=colour237, noitalics]"
+
+if "test ! -d ~/.tmux/plugins/tpm" \
+     "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+
+     set -g @yank_selection 'clipboard' # or 'secondary' or 'clipboard'
+     set -g @yank_selection_mouse 'clipboard' # or 'primary' or 'secondary'
+
+# dnf install xsel
+     set -g @plugin 'tmux-plugins/tmux-yank'
+# set -g @plugin 'egel/tmux-gruvbox'
+
+     run -b '~/.tmux/plugins/tpm/tpm'
+
