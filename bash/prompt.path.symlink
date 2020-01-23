@@ -1,13 +1,14 @@
 export CLICOLOR=1
 export LSCOLORS=exfxcxdxbxegedabagacad
 
-BLUE='\033[0;34m'
-SET='\033[0m'
-NAME='\[\033]0;\w\007\]'
+CLEAR='\e[0m'
+DIM='\e[2m'
 
 prompt() {
-    # PS1="$(powerline-go --modules time,git -static-prompt-indicator --shell bash $?)\n\w$ "
-    PS1="$NAME$(powerline-rs --time_format %H:%M:%S.%3f --modules time --shell bash $?)\n\w$ "
+# PS1="$NAME$(powerline-rs --time_format %H:%M:%S.%3f --modules time,git,gitstage --theme ~/Projects/personal/powerline-rs/themes/gruvbox.theme --shell bash $?)\n\w$ "
+# PS1="$NAME$(powerline-rs --time_format %H:%M:%S.%3f --modules time --shell bash $?)\n\w$ "
+# PS1="$NAME$(powerline-rs --modules time --shell bash $?)\n\w$ "
+  PS1="$DIM$(gdate +%H:%M:%S.%3N) [\w]$ $CLEAR"
 }
 PROMPT_COMMAND=prompt
 

@@ -8,7 +8,7 @@ module.exports = {
         footerTransparent: true,
       },
     // default font size in pixels for all tabs
-    fontSize: 14.0,
+    fontSize: 16.0,
 
     // font family with optional fallbacks
     // fontFamily: 'Monaco, Consolas, "Lucida Console", monospace',

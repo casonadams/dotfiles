@@ -52,6 +52,16 @@ set -g mode-keys vi
 bind-key enter next-layout
 bind-key C-o rotate-window
 
+# Split horz 25% of screen with '\'
+bind '\' splitw -v -p 25
+bind '|' splitw -h -p 25
+
+# Use vim keys to navigate panes
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
 ## COLORSCHEME: gruvbox dark
 set-option -g status "on"
 
@@ -69,6 +79,7 @@ set-window-option -g window-status-current-style bg=red,fg=colour237 # fg=bg1
 
 # pane border
 set-option -g pane-active-border-style fg=colour250 #fg2
+# set-option -g pane-active-border-style fg=colour109 #fg2
 set-option -g pane-border-style fg=colour237 #bg1
 
 # message infos
@@ -95,16 +106,21 @@ set-option -g status-right-style none
 set-option -g status-right-length "80"
 set-window-option -g window-status-separator ""
 
-set-option -g status-left "#[fg=colour248, bg=colour241] #S #[fg=colour241, bg=colour237, nobold, noitalics, nounderscore]"
-set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] %Y-%m-%d  %I:%M:%S %p #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour237, bg=colour248] #h "
+set-option -g status-left "#[fg=colour248, bg=colour241] #S #[fg=colour241, bg=colour237, nobold, noitalics, nounderscore] "
+set-option -g status-right "#[fg=colour239, bg=colour237, nobold, nounderscore, noitalics]#[fg=colour246,bg=colour239] #(gitmux #{pane_current_path}) #[fg=colour248, bg=colour239, nobold, noitalics, nounderscore]#[fg=colour241, bg=colour239]#[fg=colour248, bg=colour241] %H:%M:%S "
 
 set-window-option -g window-status-current-format "#[fg=colour237, bg=colour214, nobold, noitalics, nounderscore]#[fg=colour239, bg=colour214] #I #[fg=colour239, bg=colour214, bold] #W #[fg=colour214, bg=colour237, nobold, noitalics, nounderscore]"
 set-window-option -g window-status-format "#[fg=colour237,bg=colour239,noitalics]#[fg=colour223,bg=colour239] #I #[fg=colour223, bg=colour239] #W #[fg=colour239, bg=colour237, noitalics]"
 
 if "test ! -d ~/.tmux/plugins/tpm" \
-   "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+     "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 
-set -g @plugin 'tmux-plugins/tmux-yank'
-set -g @plugin 'egel/tmux-gruvbox'
+     set -g @yank_selection 'clipboard' # or 'secondary' or 'clipboard'
+     set -g @yank_selection_mouse 'clipboard' # or 'primary' or 'secondary'
 
-run -b '~/.tmux/plugins/tpm/tpm'
+# dnf install xsel
+     set -g @plugin 'tmux-plugins/tmux-yank'
+# set -g @plugin 'egel/tmux-gruvbox'
+
+     run -b '~/.tmux/plugins/tpm/tpm'
+
